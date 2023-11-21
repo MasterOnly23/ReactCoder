@@ -1,17 +1,38 @@
-const ItemsListContainer = ({title}) => {
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-    const titleStyles = {
-        fontSize: '3rem',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: 'black',
-        marginTop: '1rem',
-    }
+
+// eslint-disable-next-line react/prop-types
+const ItemListContainer = ({ products }) => {
   return (
-    <div style={titleStyles}>
-      {title}
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        width: "100vw",
+        justifyContent: "space-around",
+      }}
+    >
+      {/* eslint-disable-next-line react/prop-types*/}
+      {products.map((product) => {
+        return (
+          <Card
+            key={product.id}
+            style={{ width: "18rem", margin: 20, height: "500px" }}
+          >
+            <Link to={`/item/${product.id}`}>
+              <Card.Img variant="top" src={product.thumbnail} />
+            </Link>
+            <Card.Body>
+              <Card.Title>{product.title}</Card.Title>
+              <Card.Text>{product.description}</Card.Text>
+            </Card.Body>
+          </Card>
+        );
+      })}
     </div>
-  )
-}
+  );
+};
 
-export default ItemsListContainer
+export default ItemListContainer;
+
